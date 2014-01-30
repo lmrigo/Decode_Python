@@ -1,9 +1,9 @@
-input1 = "123456789"
-input2 = "123454321"
-input3 = "12345678910"
-input4 = "1234567891011"
-input5 = "1101211"
-input6 = "11111"
+input1 = "1"
+input2 = "11"
+input3 = "111"
+input4 = "1111"
+input5 = "11111"
+input6 = "111111"
 
 lowercaseOffset = 96
 def decode (strNum):
@@ -37,18 +37,81 @@ def counter (translated,previousAB):
 	else:
 		return counter(translated[1:],False)
 
-print 'input1:' + str(counter(translate(input1),False) == 3.0) + ' 3<=>' + str(counter(translate(input1),False))
-print 'input2:' + str(counter(translate(input2),False) == 6.0) + ' 6<=>' + str(counter(translate(input2),False))
-print 'input3:' + str(counter(translate(input3),False) == 3.0) + ' 3<=>' + str(counter(translate(input3),False))
-print 'input4:' + str(counter(translate(input4),False) == 6.0) + ' 6<=>' + str(counter(translate(input4),False))
-print 'input5:' + str(counter(translate(input5),False) == 5.0) + ' 5<=>' + str(counter(translate(input5),False))
-print 'input6:' + str(counter(translate(input5),False) == 5.0) + ' ?<=>' + str(counter(translate(input5),False))
+print 'input1:  1<=>' + str(int(counter(translate(input1),False))) + '\t' + str(counter(translate(input1),False) == 1.0) 
+print 'input2:  2<=>' + str(int(counter(translate(input2),False))) + '\t' + str(counter(translate(input2),False) == 2.0) 
+print 'input3:  3<=>' + str(int(counter(translate(input3),False))) + '\t' + str(counter(translate(input3),False) == 3.0) 
+print 'input4:  5<=>' + str(int(counter(translate(input4),False))) + '\t' + str(counter(translate(input4),False) == 5.0) 
+print 'input5:  6<=>' + str(int(counter(translate(input5),False))) + '\t' + str(counter(translate(input5),False) == 6.0) 
+print 'input6: 13<=>' + str(int(counter(translate(input5),False))) + '\t' + str(counter(translate(input5),False) == 13.0)
+
 
 """
-input1 = "123456789"
-input2 = "123454321"
-input3 = "12345678910"
-input4 = "1234567891011"
-input5 = "1101211"
-input6 = "11111"
+input1 = "1"
+input2 = "11"
+input3 = "111"
+input4 = "1111"
+input5 = "11111"
+input6 = "111111"
+
+1
+a
+1
+2
+aa
+k
+2
+3
+aaa
+a k
+k a
+3
+4
+aaaa
+aa k
+a ka
+ kaa
+ k k
+5
+5
+aaaaa
+aaa k
+aa ka
+a kaa
+a k k
+ kaaa
+ ka k
+ k ka
+8
+6
+aaaaaa
+aaaa k
+aaa ka
+aa kaa
+aa k k
+a kaaa
+a ka k
+a k ka
+ kaaaa
+ kaa k
+ ka ka
+ k kaa
+ k k k
+13
+
+"""
+""" 
+next solution
+4
+aaaa = 1
+1+aa k,3 = 1
+1+a ka,2 = 1
+1+ kaa,1 = 1
+1+ k k,3 = 1
+
+
+aa k
+a ka
+ kaa
+ k k
+5
 """
