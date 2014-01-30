@@ -1,66 +1,56 @@
 input = "123456789"
 input2 = "123454321"
+input3 = "12345678910"
+input4 = "1234567891011"
+input5 = "1101211"
 
-def decode (num):
-	return chr(int(num) + 96)
+lowercaseOffset = 96
+def decode (strNum):
+	return chr(int(strNum) + lowercaseOffset)
 
 def translate (input):
-	if len(input) == 1:
+	if len(input) < 1:
+		return ""
+	elif len(input) == 1:
 		return decode(input[0])
+	elif (input[0]+input[1]) == "10":
+		return decode(input[0]+input[1]) + translate(input[2:])
 	else:
 		return decode(input[0]) + translate(input[1:])
 
-print translate(input2)
+#print translate(input4)
 
-def morphAs(translated):
-	result = []
-	comboA = ['aa','ab','ac','ad','ae','af','ag','ah','ai']
-	replaceA = ['k','l','m','n','o','p','q','r','s']
-	n = 0
-	for i in range(len(translated)-1):
-		for j in range(len(comboA)):
-			if (translated[i]+translated[i+1]) == comboA[j]:
-				x = translated.replace(comboA[j],replaceA[j])
-				result += ['']
-				result[n] = x
-				n += 1
-	return result
-print morphAs(translate(input2))
-
-def morphBs(translated):
-	result = []
-	comboB = ['ba','bb','bc','bd','be','bf']
-	replaceB = ['u','v','w','x','y','z']
-	n = 0
-	for i in range(len(translated)-1):
-		for j in range(len(comboB)):
-			if (translated[i]+translated[i+1]) == comboB[j]:
-				x = translated.replace(comboB[j],replaceB[j])
-				result += ['']
-				result[n] = x
-				n += 1
-	return result
-print morphBs(translate(input2))
-
-
-"""
-def possibilities (input)
-	if (input[0] == '1') or (input[0] == '2'):
-		return [translate(input,False),translate(input,True)]
+#comboA = {'aa':'k','ab':'l','ac':'m','ad':'n','ae':'o','af':'p','ag':'q','ah':'r','ai':'s'}
+#comboB = {'ba':'u','bb':'v','bc':'w','bd':'x','be':'y','bf':'z'}
+comboA = ['aa','ab','ac','ad','ae','af','ag','ah','ai']
+comboB = ['ba','bb','bc','bd','be','bf']
+def counter (translated,m):
+	if len(translated) <= 1:
+		return 0
+	duet = translated[0]+translated[1]
+	if duet in comboA or duet in comboB:
+		return 2 + counter(translated[1:],0)
 	else:
-		return
+		return counter(translated[1:],0)
 
-
-def translateLoop (input):
-	result = ['']
-	n = 0
-	for i in range(len(input)):
-		if(input[i] == '1') or (input[i] == '2'):
-			result[n] += translate(input[i:])
-			result += ['']
-			n += 1
-			result[n] += decode(input[i]+input[i+1])
-		else:
-			result[n] += translate(input[i:])
-	return result
+print input5 # 1101211
+print translate(input5) # ajabaa
+print counter(translate(input5),0) # 6
+"""
+1. ajabaa
+2. ajabk
+3. ajaua
+4. ajlaa
+5. ajlk
+"""
+"""
+print input4 # 1234567891011
+print translate(input4) # abcdefghijaa
+print counter(translate(input4),0) # 6
+1. abcdefghijaa
+2. abcdefghijk
+3. lcdefghijaa
+4. lcdefghijk
+5. awdefghijaa
+6. awdefghijk
 """
